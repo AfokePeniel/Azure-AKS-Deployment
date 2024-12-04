@@ -162,3 +162,28 @@ kubectl get nodes
 - Replace placeholders (`<ResourceGroupName>`, `<ACRName>`, etc.) with your actual values
 - Ensure all services are properly registered before proceeding with next steps
 - Monitor resource usage to stay within free tier limits
+
+## Cleanup Resources
+To avoid unnecessary charges, make sure to delete your resources after testing.
+
+### Option 1: Using Azure CLI
+```
+# Delete the AKS cluster
+az aks delete --resource-group <ResourceGroupName> --name <AKSClusterName> --yes --no-wait
+
+# Delete the ACR
+az acr delete --resource-group <ResourceGroupName> --name <ACRName> --yes
+
+# Finally, delete the resource group and all remaining resources
+az group delete --name <ResourceGroupName> --yes
+```
+
+### Option 2: Using Azure Portal
+1. Navigate to the Azure Portal (https://portal.azure.com)
+2. Go to Resource Groups
+3. Select your resource group
+4. Click the "Delete resource group" button at the top
+5. Enter the resource group name to confirm
+6. Click "Delete" to remove all resources
+
+⚠️ Warning: These actions permanently delete your resources. Make sure you're done with testing before proceeding.
